@@ -1,2 +1,101 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maîtrise des Coûts AWS - Optimisation Cloud</title>
+    <%= stylesheet_link_tag 'cost_optimization', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_importmap_tags %>
+</head>
+<body>
+    <div class="header">
+        <h1>Optimisation des Coûts AWS</h1>
+        <p>Maîtrisez votre budget cloud, maximisez votre efficacité.</p>
+    </div>
+
+    <div class="container">
+        <section class="section advantages">
+            <h2>🚀 Pourquoi optimiser vos coûts AWS ?</h2>
+            <div class="advantages-grid">
+                <div class="advantage-card reveal-on-scroll">
+                    <h3>Économies substantielles</h3>
+                    <p>Réduisez votre facture cloud de 20% à 60% en éliminant les gaspillages.</p>
+                </div>
+                <div class="advantage-card reveal-on-scroll delay-1">
+                    <h3>Performance améliorée</h3>
+                    <p>Une infrastructure optimisée est souvent une infrastructure plus rapide.</p>
+                </div>
+                <div class="advantage-card reveal-on-scroll delay-2">
+                    <h3>Meilleure gouvernance</h3>
+                    <p>Obtenez une visibilité complète sur vos dépenses et allocations de ressources.</p>
+                </div>
+                <div class="advantage-card reveal-on-scroll delay-3">
+                    <h3>Flexibilité accrue</h3>
+                    <p>Libérez des fonds pour innover et investir dans de nouvelles technologies.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section processes">
+            <h2>💡 Les clés de l'optimisation des coûts AWS</h2>
+            <div class="process-steps">
+                <div class="process-card reveal-on-scroll">
+                    <div class="icon">📊</div>
+                    <h3>1. Visibilité et Analyse</h3>
+                    <p>Utilisez AWS Cost Explorer, Cost & Usage Report (CUR) et des outils tiers pour comprendre vos dépenses.</p>
+                </div>
+                <div class="process-card reveal-on-scroll delay-1">
+                    <div class="icon">🧹</div>
+                    <h3>2. Nettoyage des Ressources Inutilisées</h3>
+                    <p>Identifiez et supprimez les instances EC2 arrêtées, les volumes EBS orphelins, les snapshots anciens.</p>
+                </div>
+                <div class="process-card reveal-on-scroll delay-2">
+                    <div class="icon">⚙️</div>
+                    <h3>3. Dimensionnement Correct (Right-sizing)</h3>
+                    <p>Ajustez la taille de vos ressources (EC2, RDS) à leurs besoins réels pour éviter la sur-provisionnement.</p>
+                </div>
+                <div class="process-card reveal-on-scroll delay-3">
+                    <div class="icon">💰</div>
+                    <h3>4. Modèles d'Achat Flexibles</h3>
+                    <p>Utilisez les Réservations (RIs) et les Savings Plans pour des remises importantes sur les charges de travail stables.</p>
+                </div>
+                <div class="process-card reveal-on-scroll delay-4">
+                    <div class="icon">🔄</div>
+                    <h3>5. Architecture Serverless & Conteneurs</h3>
+                    <p>Adoptez Lambda, Fargate pour payer uniquement ce que vous consommez, et optimiser les coûts opérationnels.</p>
+                </div>
+                <div class="process-card reveal-on-scroll delay-5">
+                    <div class="icon">🌐</div>
+                    <h3>6. Gestion du Stockage</h3>
+                    <p>Optimisez S3 avec des classes de stockage intelligentes (S3 Intelligent-Tiering) et des politiques de cycle de vie.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="footer">
+        <p>&copy; <%= Time.now.year %> Optimisation Cloud AWS. Tous droits réservés.</p>
+    </div>
+
+    <script>
+        // Simple Intersection Observer pour les animations au scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Optionnel: pour que l'animation ne se joue qu'une fois
+                    }
+                });
+            }, {
+                rootMargin: '0px',
+                threshold: 0.1 // L'animation se déclenche quand 10% de l'élément est visible
+            });
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
