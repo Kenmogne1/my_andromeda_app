@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maîtrise des Coûts AWS - Optimisation Cloud</title>
-    <%= stylesheet_link_tag 'cost_optimization', media: 'all', 'data-turbo-track': 'reload' %>
+    <%# Pas besoin de stylesheet_link_tag ici, il est dans le layout principal %>
     <%= javascript_importmap_tags %>
 </head>
 <body>
@@ -19,55 +19,81 @@
             <div class="advantages-grid">
                 <div class="advantage-card reveal-on-scroll">
                     <h3>Économies substantielles</h3>
-                    <p>Réduisez votre facture cloud de 20% à 60% en éliminant les gaspillages.</p>
+                    <p>Réduisez votre facture cloud de 20% à 60%. C'est de l'argent que vous pouvez réinvestir dans l'innovation plutôt que de le payer pour des ressources inutilisées.</p>
                 </div>
                 <div class="advantage-card reveal-on-scroll delay-1">
                     <h3>Performance améliorée</h3>
-                    <p>Une infrastructure optimisée est souvent une infrastructure plus rapide.</p>
+                    <p>Une infrastructure optimisée ("right-sized") est souvent plus performante. Payer pour un serveur trop gros n'améliore pas la vitesse, mais choisir le bon type d'instance le peut.</p>
                 </div>
                 <div class="advantage-card reveal-on-scroll delay-2">
-                    <h3>Meilleure gouvernance</h3>
-                    <p>Obtenez une visibilité complète sur vos dépenses et allocations de ressources.</p>
+                    <h3>Gouvernance et Visibilité</h3>
+                    <p>Obtenez une visibilité complète sur qui dépense quoi. Sans optimisation, votre facture AWS est une "boîte noire". Après, elle devient un rapport financier clair.</p>
                 </div>
                 <div class="advantage-card reveal-on-scroll delay-3">
-                    <h3>Flexibilité accrue</h3>
-                    <p>Libérez des fonds pour innover et investir dans de nouvelles technologies.</p>
+                    <h3>Éviter les Chocs Budgétaires</h3>
+                    <p>Le risque n°1 pour un débutant est la "facture surprise" de plusieurs milliers d'euros à cause d'une ressource oubliée. L'optimisation met fin à ce risque.</p>
                 </div>
             </div>
         </section>
 
         <section class="section processes">
-            <h2>💡 Les clés de l'optimisation des coûts AWS</h2>
+            <h2>💡 Processus Complet d'Optimisation des Coûts</h2>
             <div class="process-steps">
+                
                 <div class="process-card reveal-on-scroll">
-                    <div class="icon">📊</div>
-                    <h3>1. Visibilité et Analyse</h3>
-                    <p>Utilisez AWS Cost Explorer, Cost & Usage Report (CUR) et des outils tiers pour comprendre vos dépenses.</p>
+                    <div class="icon">📐</div>
+                    <h3>1. Planifier avec le AWS Pricing Calculator</h3>
+                    <p><strong>Le Risque :</strong> Partir "à l'aveugle". AWS est un modèle "pay-as-you-go". Si vous devinez la taille de votre serveur ou votre trafic réseau, vous aurez une facture surprise.
+                    <br/><strong>La Solution :</strong> Cet outil est votre "devis". Vous modélisez votre infrastructure (EC2, RDS, S3...) et il vous donne une estimation mensuelle. C'est l'étape 0 pour ne pas signer un chèque en blanc à AWS.</p>
                 </div>
+
                 <div class="process-card reveal-on-scroll delay-1">
-                    <div class="icon">🧹</div>
-                    <h3>2. Nettoyage des Ressources Inutilisées</h3>
-                    <p>Identifiez et supprimez les instances EC2 arrêtées, les volumes EBS orphelins, les snapshots anciens.</p>
+                    <div class="icon">📊</div>
+                    <h3>2. Analyser avec Cost Explorer & Budgets</h3>
+                    <p><strong>Le Risque :</strong> Ne pas savoir où part votre argent.
+                    <br/><strong>La Solution :</strong> <strong>Cost Explorer</strong> est votre "relevé bancaire" visuel. Il vous montre quel service (EC2 ? RDS ?) consomme le plus. <strong>AWS Budgets</strong> est votre "alerte de découvert". Vous fixez un seuil (ex: 50€) et AWS vous envoie un email si vous êtes *projeté* de le dépasser. C'est votre filet de sécurité n°1.</p>
                 </div>
+
                 <div class="process-card reveal-on-scroll delay-2">
-                    <div class="icon">⚙️</div>
-                    <h3>3. Dimensionnement Correct (Right-sizing)</h3>
-                    <p>Ajustez la taille de vos ressources (EC2, RDS) à leurs besoins réels pour éviter la sur-provisionnement.</p>
+                    <div class="icon">🛡️</div>
+                    <h3>3. Auditer avec AWS Trusted Advisor</h3>
+                    <p><strong>Le Risque :</strong> Payer pour des "ressources fantômes".
+                    <br/><strong>La Solution :</strong> C'est votre consultant AWS gratuit (avec un plan de support). Il scanne votre compte et trouve l'argent facile à économiser. Il vous dira : "Attention, vous payez pour ce disque dur (EBS) qui n'est attaché à aucun serveur" ou "Cette adresse IP (Elastic IP) n'est pas utilisée, et je vous la facture".</p>
                 </div>
+
                 <div class="process-card reveal-on-scroll delay-3">
-                    <div class="icon">💰</div>
-                    <h3>4. Modèles d'Achat Flexibles</h3>
-                    <p>Utilisez les Réservations (RIs) et les Savings Plans pour des remises importantes sur les charges de travail stables.</p>
+                    <div class="icon">⚙️</div>
+                    <h3>4. Dimensionner Correctement (Right-Sizing)</h3>
+                    <p><strong>Le Risque :</strong> Le gaspillage n°1. C'est prendre un serveur `t2.large` "au cas où", alors qu'un `t2.small` suffirait. Vous payez pour 90% de puissance inutilisée.
+                    <br/><strong>La Solution :</strong> <strong>AWS Compute Optimizer</strong> analyse l'utilisation *réelle* de vos serveurs (CPU, RAM) et vous dit : "Ce serveur est surdimensionné. Vous pouvez le changer pour ce modèle plus petit et économiser X$ par mois sans risque."</p>
                 </div>
+                
                 <div class="process-card reveal-on-scroll delay-4">
-                    <div class="icon">🔄</div>
-                    <h3>5. Architecture Serverless & Conteneurs</h3>
-                    <p>Adoptez Lambda, Fargate pour payer uniquement ce que vous consommez, et optimiser les coûts opérationnels.</p>
+                    <div class="icon">💰</div>
+                    <h3>5. Utiliser les Modèles d'Achat Intelligents</h3>
+                    <p><strong>Le Risque :</strong> Payer tout au prix "On-Demand" (à la demande), qui est le plus cher.
+                    <br/><strong>La Solution :</strong> Si votre application doit tourner 1 an, dites-le à AWS ! En vous engageant avec des <strong>Savings Plans</strong> ou des <strong>Reserved Instances</strong>, vous obtenez 40% à 72% de réduction. Pour des tâches non-critiques (tests, calculs), utilisez les <strong>Instances Spot</strong> : ce sont les serveurs invendus d'AWS, 90% moins chers. Le piège ? AWS peut les reprendre à tout moment.</p>
                 </div>
+
                 <div class="process-card reveal-on-scroll delay-5">
-                    <div class="icon">🌐</div>
-                    <h3>6. Gestion du Stockage</h3>
-                    <p>Optimisez S3 avec des classes de stockage intelligentes (S3 Intelligent-Tiering) et des politiques de cycle de vie.</p>
+                    <div class="icon">🔄</div>
+                    <h3>6. Moderniser votre Architecture</h3>
+                    <p><strong>Le Risque :</strong> Payer un serveur 24/7 alors qu'il ne travaille que 5 minutes par heure.
+                    <br/><strong>La Solution :</strong> Passez au <strong>Serverless</strong> (AWS Lambda). Vous ne payez que pour les millisecondes où votre code s'exécute. C'est la fin du gaspillage "idle". Pour S3, activez <strong>S3 Intelligent-Tiering</strong> : il déplace automatiquement vos fichiers vers une classe de stockage moins chère s'ils ne sont pas consultés.</p>
+                </div>
+
+                <div class="process-card reveal-on-scroll delay-6">
+                    <div class="icon">🧹</div>
+                    <h3>7. Nettoyer les "Zombies" (Automatisation)</h3>
+                    <p><strong>Le Risque :</strong> Les ressources "orphelines". Un développeur fait un test, crée un disque, un snapshot, une IP... et oublie de les supprimer. Vous payez pour ces "zombies" pendant des mois.
+                    <br/><strong>La Solution :</strong> Automatiser le nettoyage. On crée des scripts (souvent Lambda) qui tournent chaque nuit et suppriment tout ce qui est inutile (ex: "supprime les disques non-attachés de plus de 7 jours").</p>
+                </div>
+
+                <div class="process-card reveal-on-scroll delay-7">
+                    <div class="icon">🤖</div>
+                    <h3>8. Mettre en place la Gouvernance (Tags & SCPs)</h3>
+                    <p><strong>Le Risque :</strong> Avoir 5 projets sur le même compte et ne pas savoir qui dépense quoi.
+                    <br/><strong>La Solution :</strong> Le <strong>Tagging</strong> (étiquetage). Vous étiquetez chaque ressource (ex: `Projet:SiteWeb`, `Equipe:Marketing`). Cost Explorer vous donne alors la facture par projet. Les <strong>SCPs</strong> (Service Control Policies) sont le "contrôle parental" de votre compte AWS : vous pouvez *interdire* à vos développeurs de créer des types d'instances GPU hors de prix.</p>
                 </div>
             </div>
         </section>

@@ -1,4 +1,4 @@
-/* app/assets/stylesheets/cost_optimization.scss */
+/* app/assets/stylesheets/application.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
@@ -144,6 +144,7 @@ h2 {
 .process-card p {
     font-size: 0.95rem;
     color: #666;
+    text-align: left; /* Meilleur pour la lisibilité des longs textes */
 }
 
 .footer {
@@ -188,6 +189,9 @@ h2 {
 .reveal-on-scroll.delay-3 { transition-delay: 0.3s; }
 .reveal-on-scroll.delay-4 { transition-delay: 0.4s; }
 .reveal-on-scroll.delay-5 { transition-delay: 0.5s; }
+.reveal-on-scroll.delay-6 { transition-delay: 0.6s; }
+.reveal-on-scroll.delay-7 { transition-delay: 0.7s; }
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
