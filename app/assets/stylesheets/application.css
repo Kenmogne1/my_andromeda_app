@@ -1,13 +1,29 @@
 /* app/assets/stylesheets/application.css */
 
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. The style in this file won't be inlined in the page.
+ */
+
+
 
 :root {
-    --primary-color: #007bff; /* Bleu AWS */
-    --secondary-color: #f8f9fa; /* Gris clair */
-    --text-color: #333;
-    --card-bg: #ffffff;
-    --shadow-light: rgba(0, 0, 0, 0.1);
-    --shadow-hover: rgba(0, 123, 255, 0.2);
+    /* Couleurs pour le thème sombre */
+    --primary-color: #007bff; /* Bleu AWS reste le même pour les accents */
+    --secondary-color: #1a1a1a; /* Fond très sombre */
+    --text-color: #e0e0e0; /* Texte clair */
+    --card-bg: #2b2b2b; /* Fond des cartes légèrement plus clair que le fond général */
+    --card-bg-hover: #3a3a3a; /* Fond des cartes au survol */
+    --border-color: #444; /* Bordures subtiles */
+    --shadow-light: rgba(0, 0, 0, 0.4); /* Ombre plus foncée pour le fond sombre */
+    --shadow-hover: rgba(0, 123, 255, 0.3); /* Ombre de survol */
 }
 
 body {
@@ -17,7 +33,8 @@ body {
     padding: 0;
     background-color: var(--secondary-color);
     color: var(--text-color);
-    overflow-x: hidden; /* Empêche le scroll horizontal */
+    overflow-x: hidden;
+    scroll-behavior: smooth; /* Pour un défilement doux */
 }
 
 .header {
@@ -25,135 +42,175 @@ body {
     color: white;
     padding: 3rem 1rem;
     text-align: center;
-    box-shadow: 0 4px 8px var(--shadow-light);
-    animation: fadeInDown 1s ease-out;
+    box-shadow: 0 6px 15px var(--shadow-light);
+    animation: fadeInDown 1.2s ease-out; /* Animation légèrement plus longue */
 }
 
 .header h1 {
-    font-size: 3.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 3.8rem; /* Plus grand */
+    margin-bottom: 0.6rem;
     font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Ombre légère sur le texte */
 }
 
 .header p {
-    font-size: 1.2rem;
+    font-size: 1.3rem; /* Plus grand */
     font-weight: 300;
 }
 
 .container {
     max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+    margin: 3rem auto; /* Plus d'espace */
+    padding: 0 1.5rem;
 }
 
 .section {
     background-color: var(--card-bg);
-    padding: 2.5rem;
-    margin-bottom: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px var(--shadow-light);
-    transition: transform 0.3s ease-in-out;
+    padding: 3rem; /* Plus d'espace interne */
+    margin-bottom: 3rem; /* Plus d'espace entre les sections */
+    border-radius: 15px; /* Bordures plus arrondies */
+    box-shadow: 0 8px 20px var(--shadow-light);
+    border: 1px solid var(--border-color); /* Bordure subtile */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    opacity: 0; /* Pour l'animation d'entrée de section */
+    transform: translateY(30px); /* Pour l'animation d'entrée de section */
+}
+
+.section.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s; /* Délai pour l'animation de section */
 }
 
 .section:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.005); /* Effet plus prononcé */
+    box-shadow: 0 12px 30px var(--shadow-hover);
 }
 
 h2 {
     color: var(--primary-color);
-    font-size: 2.5rem;
+    font-size: 3rem; /* Plus grand */
     text-align: center;
-    margin-bottom: 2.5rem;
-    font-weight: 600;
+    margin-bottom: 3rem; /* Plus d'espace */
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
 
 /* Avantages Section */
 .advantages-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+    gap: 2rem; /* Plus d'espace */
 }
 
 .advantage-card {
-    background-color: #e9f5ff; /* Couleur de fond légère pour les cartes d'avantage */
-    padding: 1.8rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    background-color: var(--card-bg); /* Utilise la couleur de fond des cartes */
+    padding: 2rem;
+    border-radius: 12px; /* Plus arrondi */
+    box-shadow: 0 5px 15px var(--shadow-light);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
     text-align: center;
-    border-left: 5px solid var(--primary-color); /* Barre latérale distinctive */
+    border-left: 5px solid var(--primary-color);
+    position: relative;
+    overflow: hidden; /* Pour l'effet d'onde au survol */
+}
+
+.advantage-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.05); /* Effet de brillance */
+    transition: left 0.5s ease;
+    transform: skewX(-20deg);
+}
+
+.advantage-card:hover::before {
+    left: 100%;
 }
 
 .advantage-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 8px 20px var(--shadow-hover);
-    background-color: #dbeaff;
+    transform: translateY(-12px) scale(1.03); /* Effet plus prononcé */
+    box-shadow: 0 15px 35px var(--shadow-hover);
+    background-color: var(--card-bg-hover); /* Changement de couleur au survol */
 }
 
 .advantage-card h3 {
     color: var(--primary-color);
-    font-size: 1.5rem;
-    margin-bottom: 0.8rem;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
     font-weight: 600;
 }
 
 .advantage-card p {
-    font-size: 1rem;
-    color: #555;
+    font-size: 1.05rem;
+    color: var(--text-color);
 }
 
 /* Processus Section */
 .process-steps {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Cartes un peu plus larges */
+    gap: 2.5rem; /* Plus d'espace */
 }
 
 .process-card {
     background-color: var(--card-bg);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 2.2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--shadow-light);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     border-top: 5px solid var(--primary-color);
+    position: relative; /* Pour l'effet de brillance */
+    overflow: hidden;
 }
 
 .process-card:hover {
-    transform: translateY(-10px) scale(1.03);
-    box-shadow: 0 10px 25px var(--shadow-hover);
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 18px 40px var(--shadow-hover);
+    background-color: var(--card-bg-hover);
 }
 
 .process-card .icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    line-height: 1; /* Assure un bon alignement vertical */
+    font-size: 3.5rem; /* Icônes plus grandes */
+    margin-bottom: 1.2rem;
+    line-height: 1;
+    color: var(--primary-color); /* Couleur des icônes */
+    transition: transform 0.3s ease;
 }
+
+.process-card:hover .icon {
+    transform: scale(1.1) rotate(5deg); /* Petite animation sur l'icône */
+}
+
 
 .process-card h3 {
     color: var(--primary-color);
-    font-size: 1.6rem;
-    margin-bottom: 0.7rem;
+    font-size: 1.7rem;
+    margin-bottom: 0.8rem;
     font-weight: 600;
 }
 
 .process-card p {
-    font-size: 0.95rem;
-    color: #666;
-    text-align: left; /* Meilleur pour la lisibilité des longs textes */
+    font-size: 1rem;
+    color: var(--text-color);
+    text-align: left;
 }
 
 .footer {
     text-align: center;
-    padding: 2rem 1rem;
-    margin-top: 3rem;
+    padding: 2.5rem 1.5rem; /* Plus de padding */
+    margin-top: 4rem; /* Plus d'espace */
     background-color: var(--primary-color);
     color: white;
-    font-size: 0.9rem;
-    box-shadow: 0 -4px 8px var(--shadow-light);
+    font-size: 1rem;
+    box-shadow: 0 -6px 15px var(--shadow-light);
 }
 
 /* --- Animations --- */
@@ -162,7 +219,7 @@ h2 {
 @keyframes fadeInDown {
     from {
         opacity: 0;
-        transform: translateY(-50px);
+        transform: translateY(-60px);
     }
     to {
         opacity: 1;
@@ -170,16 +227,35 @@ h2 {
     }
 }
 
-/* Animation au scroll */
+/* Animation des sections (nouvelle) */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reveal-section.is-revealed {
+    animation: slideInUp 0.8s ease-out forwards;
+}
+
+
+/* Animation des cartes au scroll */
 .reveal-on-scroll {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(30px);
+    filter: blur(5px); /* Effet de flou à l'entrée */
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out, filter 0.7s ease-out;
 }
 
 .reveal-on-scroll.is-visible {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
 }
 
 /* Délai pour les cartes */
@@ -195,33 +271,41 @@ h2 {
 /* Responsive Design */
 @media (max-width: 768px) {
     .header h1 {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
     }
     .header p {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
     h2 {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
     .section {
-        padding: 1.5rem;
+        padding: 2rem;
+        margin-bottom: 2rem;
     }
     .advantages-grid, .process-steps {
         grid-template-columns: 1fr;
     }
     .advantage-card, .process-card {
-        padding: 1.5rem;
+        padding: 1.8rem;
+    }
+    .process-card .icon {
+        font-size: 3rem;
     }
 }
 
 @media (max-width: 480px) {
     .header h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
     h2 {
-        font-size: 1.8rem;
+        font-size: 1.9rem;
     }
     .container {
-        margin: 1rem auto;
+        margin: 1.5rem auto;
+        padding: 0 0.8rem;
+    }
+    .section {
+        padding: 1.5rem;
     }
 }
