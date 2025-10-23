@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maîtrise des Coûts AWS - Optimisation Cloud</title>
+
     <%= javascript_importmap_tags %>
 </head>
 <body>
@@ -13,7 +14,7 @@
     </div>
 
     <div class="container">
-        <section class="section advantages">
+        <section class="section advantages reveal-section">
             <h2>🚀 Pourquoi optimiser vos coûts AWS ?</h2>
             <div class="advantages-grid">
                 <div class="advantage-card reveal-on-scroll">
@@ -35,7 +36,7 @@
             </div>
         </section>
 
-        <section class="section processes">
+        <section class="section processes reveal-section">
             <h2>💡 Processus Complet d'Optimisation des Coûts</h2>
             <div class="process-steps">
                 
@@ -103,22 +104,39 @@
     </div>
 
     <script>
-        // Simple Intersection Observer pour les animations au scroll
         document.addEventListener('DOMContentLoaded', () => {
-            const observer = new IntersectionObserver((entries, observer) => {
+            // Observer pour les cartes individuelles (reveal-on-scroll)
+            const cardObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); // Optionnel: pour que l'animation ne se joue qu'une fois
+                        observer.unobserve(entry.target);
                     }
                 });
             }, {
                 rootMargin: '0px',
-                threshold: 0.1 // L'animation se déclenche quand 10% de l'élément est visible
+                threshold: 0.1
             });
 
             document.querySelectorAll('.reveal-on-scroll').forEach(element => {
-                observer.observe(element);
+                cardObserver.observe(element);
+            });
+
+            // Observer pour les sections entières (reveal-section)
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: '0px',
+                threshold: 0.05 // Se déclenche plus tôt quand la section est visible
+            });
+
+            document.querySelectorAll('.reveal-section').forEach(element => {
+                sectionObserver.observe(element);
             });
         });
     </script>
